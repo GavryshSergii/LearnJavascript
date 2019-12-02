@@ -1,4 +1,4 @@
-// import { isEmpty } from './objects';
+// import { assert } from 'chai';
 
 describe('isEmpty', () => {
   it('возвращает true для пустого объекта', () => {
@@ -22,10 +22,35 @@ describe('multiplyNumeric', () => {
     multiplyNumeric(menu);
     assert.equal(menu.width, 400);
     assert.equal(menu.height, 600);
-    assert.equal(menu.title, "My menu");
+    assert.equal(menu.title, 'My menu');
   });
 
   it('returns nothing', () => {
-    assert.isUndefined( multiplyNumeric({}) );
+    assert.isUndefined(multiplyNumeric({}));
+  });
+});
+
+describe('калькулятор', () => {
+  context('Когда 2 и 3 введены', () => {
+    beforeEach(() => {
+      sinon.stub(window, 'prompt');
+
+      prompt.onCall(0).returns('2');
+      prompt.onCall(1).returns('3');
+
+      calculator.read();
+    });
+
+    afterEach(() => {
+      prompt.restore();
+    });
+
+    it('Сумма равна 5', () => {
+      assert.equal(calculator.sum(), 5);
+    });
+
+    it('Произведение равно 6', () => {
+      assert.equal(calculator.mul(), 6);
+    });
   });
 });
