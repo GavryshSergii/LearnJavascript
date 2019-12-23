@@ -105,3 +105,61 @@ describe('getMaxSubSum', () => {
     assert.equal(getMaxSubSum([2, -8, 5, -1, 2, -3, 2]), 6);
   });
 });
+
+describe('camelize', () => {
+
+  it('leaves an empty line as is', () => {
+    assert.equal(camelize(''), '');
+  });
+
+  it('turns background-color into backgroundColor', () => {
+    assert.equal(camelize('background-color'), 'backgroundColor');
+  });
+
+  it('turns list-style-image into listStyleImage', () => {
+    assert.equal(camelize('list-style-image'), 'listStyleImage');
+  });
+
+  it('turns -webkit-transition into WebkitTransition', () => {
+    assert.equal(camelize('-webkit-transition'), 'WebkitTransition');
+  });
+
+  it('turns list-s-image into listSImage', () => {
+    assert.equal(camelize('list-s-image'), 'listSImage');
+  });
+});
+
+describe('filterRange', () => {
+
+  it('returns the filtered values', () => {
+    const arr = [5, 3, 8, 1];
+
+    const filtered = filterRange(arr, 1, 4);
+
+    assert.deepEqual(filtered, [3, 1]);
+  });
+
+  it("doesn't change the array", () => {
+    const arr = [5, 3, 8, 1];
+
+    const filtered = filterRange(arr, 1, 4);
+
+    assert.deepEqual(arr, [5, 3, 8, 1]);
+  });
+});
+
+describe('filterRangeInPlace', () => {
+
+  it('returns the filtered values', () => {
+
+    let arr = [5, 3, 8, 1];
+
+    filterRangeInPlace(arr, 1, 4);
+
+    assert.deepEqual(arr, [3, 1]);
+  });
+
+  it("doesn't return anything", () => {
+    assert.isUndefined(filterRangeInPlace([1, 2, 3], 1, 4));
+  });
+});
