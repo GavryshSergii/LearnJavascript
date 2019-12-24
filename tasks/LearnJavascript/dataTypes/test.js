@@ -198,3 +198,39 @@ describe('unique', () => {
     assert.deepEqual(strings, ['a', 'b', 'c', 'd']);
   });
 });
+
+describe('uniqueSet', () => {
+  it('removes non-unique elements', () => {
+    const strings = ['a', 'b', 'c', 'a', 'a', 'c', 'b', 'x', ':-O'];
+    assert.deepEqual(uniqueSet(strings), ['a', 'b', 'c', 'x', ':-O']);
+  });
+
+  it('does not change the source array', () => {
+    const strings = ['a', 'b', 'c', 'd'];
+    uniqueSet(strings);
+    assert.deepEqual(strings, ['a', 'b', 'c', 'd']);
+  });
+});
+
+function intersection(arr1, arr2) {
+  return arr1.filter(item => arr2.includes(item));
+}
+
+describe('aclean', () => {
+
+  it('returns exactly 1 word from each anagram set', () => {
+    let arr = ['nap', 'teachers', 'cheaters', 'PAN', 'ear', 'era', 'hectares'];
+
+    let result = aclean(arr);
+    assert.equal(result.length, 3);
+
+    assert.equal(intersection(result, ['nap', 'PAN']).length, 1);
+    assert.equal(intersection(result, ['teachers', 'cheaters', 'hectares']).length, 1);
+    assert.equal(intersection(result, ['ear', 'era']).length, 1);
+  });
+
+  it('is case-insensitive', () => {
+    let arr = ['era', 'EAR'];
+    assert.equal(aclean(arr).length, 1);
+  });
+});
