@@ -35,8 +35,8 @@ describe('readNumber', () => {
   });
 });
 
-//strings
-describe("ucFirst", () => {
+// strings
+describe('ucFirst', () => {
   it('Переводит первый символ в верхний регистр', () => {
     assert.strictEqual(ucFirst('john'), 'John');
   });
@@ -50,14 +50,14 @@ describe('truncate', () => {
   it('усекает строку до заданной длины (включая многоточие)', () => {
     assert.equal(
       truncate('Вот, что мне хотелось бы сказать на эту тему:', 20),
-      'Вот, что мне хотело…'
+      'Вот, что мне хотело…',
     );
   });
 
   it('не меняет и так короткие строки', () => {
     assert.equal(
       truncate('Всем привет!', 20),
-      'Всем привет!'
+      'Всем привет!',
     );
   });
 });
@@ -107,7 +107,6 @@ describe('getMaxSubSum', () => {
 });
 
 describe('camelize', () => {
-
   it('leaves an empty line as is', () => {
     assert.equal(camelize(''), '');
   });
@@ -130,7 +129,6 @@ describe('camelize', () => {
 });
 
 describe('filterRange', () => {
-
   it('returns the filtered values', () => {
     const arr = [5, 3, 8, 1];
 
@@ -149,10 +147,8 @@ describe('filterRange', () => {
 });
 
 describe('filterRangeInPlace', () => {
-
   it('returns the filtered values', () => {
-
-    let arr = [5, 3, 8, 1];
+    const arr = [5, 3, 8, 1];
 
     filterRangeInPlace(arr, 1, 4);
 
@@ -161,5 +157,44 @@ describe('filterRangeInPlace', () => {
 
   it("doesn't return anything", () => {
     assert.isUndefined(filterRangeInPlace([1, 2, 3], 1, 4));
+  });
+});
+
+describe('Calculator', () => {
+  let calculator;
+
+  before(() => {
+    calculator = new Calculator;
+  });
+
+  it('calculate(12 + 34) = 46', () => {
+    assert.equal(calculator.calculate('12 + 34'), 46);
+  });
+
+  it('calculate(34 - 12) = 22', () => {
+    assert.equal(calculator.calculate('34 - 12'), 22);
+  });
+
+  it('add multiplication: calculate(2 * 3) = 6', () => {
+    calculator.addMethod('*', (a, b) => a * b);
+    assert.equal(calculator.calculate('2 * 3'), 6);
+  });
+
+  it('add power: calculate(2 ** 3) = 8', () => {
+    calculator.addMethod('**', (a, b) => a ** b);
+    assert.equal(calculator.calculate('2 ** 3'), 8);
+  });
+});
+
+describe('unique', () => {
+  it('removes non-unique elements', () => {
+    const strings = ['a', 'b', 'c', 'a', 'a', 'c', 'b', 'x', ':-O'];
+    assert.deepEqual(unique(strings), ['a', 'b', 'c', 'x', ':-O']);
+  });
+
+  it('does not change the source array', () => {
+    const strings = ['a', 'b', 'c', 'd'];
+    unique(strings);
+    assert.deepEqual(strings, ['a', 'b', 'c', 'd']);
   });
 });
