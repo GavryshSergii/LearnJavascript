@@ -164,7 +164,7 @@ describe('Calculator', () => {
   let calculator;
 
   before(() => {
-    calculator = new Calculator;
+    calculator = new Calculator();
   });
 
   it('calculate(12 + 34) = 46', () => {
@@ -213,15 +213,14 @@ describe('uniqueSet', () => {
 });
 
 function intersection(arr1, arr2) {
-  return arr1.filter(item => arr2.includes(item));
+  return arr1.filter((item) => arr2.includes(item));
 }
 
 describe('aclean', () => {
-
   it('returns exactly 1 word from each anagram set', () => {
-    let arr = ['nap', 'teachers', 'cheaters', 'PAN', 'ear', 'era', 'hectares'];
+    const arr = ['nap', 'teachers', 'cheaters', 'PAN', 'ear', 'era', 'hectares'];
 
-    let result = aclean(arr);
+    const result = aclean(arr);
     assert.equal(result.length, 3);
 
     assert.equal(intersection(result, ['nap', 'PAN']).length, 1);
@@ -230,7 +229,7 @@ describe('aclean', () => {
   });
 
   it('is case-insensitive', () => {
-    let arr = ['era', 'EAR'];
+    const arr = ['era', 'EAR'];
     assert.equal(aclean(arr).length, 1);
   });
 });
