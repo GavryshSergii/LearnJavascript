@@ -233,3 +233,106 @@ describe('aclean', () => {
     assert.equal(aclean(arr).length, 1);
   });
 });
+
+//destructuring
+describe('topSalary', () => {
+  it('returns top-paid person', () => {
+    let salaries = {
+      John: 100,
+      Pete: 300,
+      Mary: 250,
+    };
+
+    assert.equal(topSalary(salaries), 'Pete');
+  });
+
+  it('returns null for the empty object', () => {
+    assert.isNull(topSalary({}));
+  });
+});
+
+// Date
+describe('getLocalDay возвращает "европейский" день недели', () => {
+  it('3 января 2014 года - пятница', () => {
+    assert.equal(getLocalDay(new Date(2014, 0, 3)), 5);
+  });
+
+  it('4 января 2014 года - суббота', () => {
+    assert.equal(getLocalDay(new Date(2014, 0, 4)), 6);
+  });
+
+  it('5 января 2014 года - воскресенье', () => {
+    assert.equal(getLocalDay(new Date(2014, 0, 5)), 7);
+  });
+
+  it('6 января 2014 года - понедельник', () => {
+    assert.equal(getLocalDay(new Date(2014, 0, 6)), 1);
+  });
+
+  it('7 января 2014 года - вторник', () => {
+    assert.equal(getLocalDay(new Date(2014, 0, 7)), 2);
+  });
+
+  it('8 января 2014 года - среда', () => {
+    assert.equal(getLocalDay(new Date(2014, 0, 8)), 3);
+  });
+
+  it('9 января 2014 года - четверг', () => {
+    assert.equal(getLocalDay(new Date(2014, 0, 9)), 4);
+  });
+});
+
+describe('getWeekDay', () => {
+  it('3 января 2014 года - пятница', () => {
+    assert.equal(getWeekDay(new Date(2014, 0, 3)), 'ПТ');
+  });
+
+  it('4 января 2014 года - суббота', () => {
+    assert.equal(getWeekDay(new Date(2014, 0, 4)), 'СБ');
+  });
+
+  it('5 января 2014 года - воскресенье', () => {
+    assert.equal(getWeekDay(new Date(2014, 0, 5)), 'ВС');
+  });
+
+  it('6 января 2014 года - понедельник', () => {
+    assert.equal(getWeekDay(new Date(2014, 0, 6)), 'ПН');
+  });
+
+  it('7 января 2014 года - вторник', () => {
+    assert.equal(getWeekDay(new Date(2014, 0, 7)), 'ВТ');
+  });
+
+  it('8 января 2014 года - среда', () => {
+    assert.equal(getWeekDay(new Date(2014, 0, 8)), 'СР');
+  });
+
+  it('9 января 2014 - четверг', () => {
+    assert.equal(getWeekDay(new Date(2014, 0, 9)), 'ЧТ');
+  });
+});
+
+describe('getDateAgo', () => {
+  it('1 день до 02.01.2015 -> день 1', () => {
+    assert.equal(getDateAgo(new Date(2015, 0, 2), 1), 1);
+  });
+
+  it('2 дня до 02.01.2015 -> день 31', () => {
+    assert.equal(getDateAgo(new Date(2015, 0, 2), 2), 31);
+  });
+
+  it('100 дней до 02.01.2015 -> день 24', () => {
+    assert.equal(getDateAgo(new Date(2015, 0, 2), 100), 24);
+  });
+
+  it('365 дней до 02.01.2015 -> день 2', () => {
+    assert.equal(getDateAgo(new Date(2015, 0, 2), 365), 2);
+  });
+
+  it('переданный объект date не модифицируется', () => {
+    let date = new Date(2015, 0, 2);
+    let dateCopy = new Date(date);
+    getDateAgo(dateCopy, 100);
+    assert.equal(date.getTime(), dateCopy.getTime());
+  });
+});
